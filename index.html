@@ -5,19 +5,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Recursos de Vídeo — o ecossistema INEMA pra gerar vídeo</title>
-<meta name="description" content="Catálogo-guia de todos os projetos do ecossistema INEMA para gerar e processar vídeo: render determinístico, geração por IA, direção, orquestradores, voz/imagem e dublagem — com link para cada repo.">
+<meta name="description" content="Catálogo-guia dos ~45 projetos do ecossistema INEMA para gerar e processar vídeo e imagem: render determinístico, geração por IA local e na nuvem, direção, orquestradores, imagem, voz/música e pós — com o guia ou repo de cada um.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
-    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#E2A23B; --amb2:#f0c070; --sky:#38bdf8;
+    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#E2A23B; --amb2:#f0c070; --sky:#38bdf8; --pro:#cbd5e1;
     color-scheme:dark;
   }
   body.light{
     --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
-    --txt:#1a1a22; --mut:#5b5b68; --amb:#b9791d; --amb2:#a16207; --sky:#0369a1;
+    --txt:#1a1a22; --mut:#5b5b68; --amb:#b9791d; --amb2:#a16207; --sky:#0369a1; --pro:#b45309;
     color-scheme:light;
   }
   body.light .hero .glow{opacity:.5}
@@ -39,6 +39,9 @@
   nav .sep{color:var(--mut);opacity:.45}
   nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
   nav .inema:hover{filter:brightness(1.15)}
+  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .pro:hover{filter:brightness(1.15)}
+  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
   nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
   nav .links a.sec{color:var(--mut)} nav .links a.sec:hover{color:var(--txt)}
   .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
@@ -80,7 +83,6 @@
   .phase .d span{color:var(--mut);font-size:.92rem}
   footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
   .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px 6px}
-  /* --- additions: hero panel + catálogo --- */
   .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:8px 4px;box-shadow:0 30px 80px -30px #000}
   .panel .pline{display:flex;align-items:center;gap:12px;padding:11px 18px;border-bottom:1px solid var(--line)}
   .panel .pline:last-child{border:none}
@@ -102,6 +104,9 @@
   .card .src.local{color:var(--mut)}
   .legend{display:flex;gap:18px;flex-wrap:wrap;color:var(--mut);font-size:.82rem;margin-top:6px}
   .legend span{display:inline-flex;align-items:center;gap:7px}
+  .proven{background:var(--card);border:1px solid var(--line);border-left:3px solid #5fbf6a;border-radius:12px;padding:16px 20px;margin-bottom:14px}
+  .proven strong{font-family:Sora}
+  .proven p{color:var(--mut);font-size:.9rem;margin:.35em 0 0}
 </style>
 </head>
 <body>
@@ -109,12 +114,16 @@
 <nav><div class="wrap">
   <a class="brand" href="#top"><span class="emoji">🎬</span> Recursos de Vídeo</a>
   <span class="sep">|</span>
-  <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+  <span class="clubpro">
+    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <span class="sep">-</span>
+    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+  </span>
   <div class="links">
     <a class="sec" href="#oque">O que é</a>
+    <a class="sec" href="#provado">Já funcionou</a>
     <a class="sec" href="#escolher">Escolher</a>
     <a class="sec" href="#catalogo">Catálogo</a>
-    <a class="sec" href="#pre">Pré-req</a>
     <a class="sec" href="#guia">Guia</a>
     <button class="tgl" id="themeToggle" aria-label="Alternar tema" title="Alternar tema">🌙</button>
     <a class="btn" href="https://github.com/inematds/recursos-video" target="_blank" rel="noopener">GitHub</a>
@@ -125,21 +134,22 @@
   <div class="glow"></div>
   <div class="wrap">
     <div>
-      <span class="chip">Ecossistema INEMA · geração de vídeo</span>
+      <span class="chip">Ecossistema INEMA · vídeo e imagem</span>
       <h1>Todo recurso pra <span class="amb">gerar vídeo</span>, num lugar só.</h1>
-      <p class="lead">Um mapa dos ~30 projetos que produzem ou processam vídeo: render determinístico, geração por IA, direção, orquestradores e suporte de voz/imagem — cada um com o que faz, como rodar e o link do repo.</p>
+      <p class="lead">Um mapa dos ~45 projetos que produzem ou processam vídeo e imagem: render determinístico, geração por IA local e na nuvem, direção, orquestradores e suporte de imagem, voz e música — cada um com o que faz, como rodar e o link do guia.</p>
       <div class="cta">
         <a class="btn" href="#catalogo">Ver o catálogo</a>
         <a class="btn ghost" href="#escolher">Como escolher</a>
       </div>
     </div>
     <div class="panel">
-      <div class="pline"><span class="e">🎞️</span><span class="t">Render determinístico</span><b>5</b></div>
-      <div class="pline"><span class="e">🤖</span><span class="t">Geração por IA</span><b>5</b></div>
-      <div class="pline"><span class="e">🎯</span><span class="t">Direção &amp; plano</span><b>5</b></div>
-      <div class="pline"><span class="e">🎬</span><span class="t">Orquestradores</span><b>6</b></div>
-      <div class="pline"><span class="e">🎙️</span><span class="t">Voz &amp; imagem</span><b>6</b></div>
-      <div class="pline"><span class="e">✂️</span><span class="t">Dublagem &amp; pós</span><b>4</b></div>
+      <div class="pline"><span class="e">🎞️</span><span class="t">Render determinístico</span><b>7</b></div>
+      <div class="pline"><span class="e">☁️</span><span class="t">IA de vídeo — nuvem</span><b>8</b></div>
+      <div class="pline"><span class="e">🖥️</span><span class="t">IA de vídeo — local</span><b>4</b></div>
+      <div class="pline"><span class="e">🖼️</span><span class="t">Imagem</span><b>5</b></div>
+      <div class="pline"><span class="e">🎯</span><span class="t">Direção &amp; plano</span><b>4</b></div>
+      <div class="pline"><span class="e">🎬</span><span class="t">Orquestradores</span><b>8</b></div>
+      <div class="pline"><span class="e">🎙️</span><span class="t">Voz, música &amp; pós</span><b>8</b></div>
     </div>
   </div>
 </header>
@@ -147,16 +157,43 @@
 <section id="oque"><div class="wrap">
   <span class="chip">O que é</span>
   <h2>Um catálogo, não um produto único</h2>
-  <p class="sub">Esta página reúne ferramentas que evoluíram em paralelo. A ideia é parar de redescobrir “qual projeto faz X”: aqui você acha o caminho certo em segundos e vai direto pro repo.</p>
+  <p class="sub">Esta página reúne ferramentas que evoluíram em paralelo. A ideia é parar de redescobrir “qual projeto faz X”: aqui você acha o caminho certo em segundos e vai direto pro guia.</p>
   <div class="grid g3">
-    <div class="card"><h3>🧭 6 caminhos</h3><p>Determinístico, IA, direção, orquestração, suporte e pós. Cada pedido de vídeo cai em um deles.</p></div>
-    <div class="card"><h3>🏠 Local-first</h3><p>A maioria roda na sua máquina/DGX: flux2-klein (imagem), inemavox (voz), HyperFrames/Remotion/pixflow (render). IA de vídeo local opcional.</p></div>
+    <div class="card"><h3>🧭 7 caminhos</h3><p>Determinístico, IA na nuvem, IA local, imagem, direção, orquestração e pós. Cada pedido de vídeo cai em um deles.</p></div>
+    <div class="card"><h3>🏠 Local-first</h3><p>A maioria roda na sua máquina/DGX: flux2-klein (imagem), inemavox (voz), HyperFrames/Remotion/pixflow (render). IA de vídeo local é opcional.</p></div>
     <div class="card"><h3>🔗 Tudo conectado</h3><p>Os orquestradores reusam os mesmos tijolos — direção do MDD, imagem do inemaimg, voz do inemavox, render do HyperFrames.</p></div>
   </div>
   <div class="legend">
     <span><span class="dot ok"></span> funcional</span>
     <span><span class="dot wip"></span> WIP / protótipo</span>
     <span><span class="dot dead"></span> vazio / legado</span>
+  </div>
+</div></section>
+
+<section id="provado"><div class="wrap">
+  <span class="chip">Olhar antes de inventar</span>
+  <h2>O que já funcionou de verdade</h2>
+  <p class="sub">Antes de escrever pipeline novo, veja o que já foi medido. Estes cinco resolveram o problema e deixaram notas — inclusive dos defeitos.</p>
+
+  <div class="proven">
+    <strong>videos-agnes — história → filme narrado, US$ 0</strong>
+    <p>Padrão-ouro para conto animado: âncoras de personagem derivadas (não geradas em paralelo), descrição do personagem repetida em toda cena, narração por parágrafo, sem texto na tela. Saídas em <code>~/projetos/output/videos-agnes/</code>.</p>
+  </div>
+  <div class="proven">
+    <strong>agnesfree / agnes-nei — a API Agnes medida em ~70 chamadas</strong>
+    <p><code>NOTAS-API.md</code> traz as regras que valem dinheiro, os defeitos do modelo e os rate limits. Inclui a armadilha do filtro: personagem criança devolve HTTP 400 de forma determinística.</p>
+  </div>
+  <div class="proven">
+    <strong>klingaimcp + klingai-nei — Kling com assinatura própria</strong>
+    <p>Acesso via MCP e CLI, com conta, defaults e dublagem com voz clonada. Notas de API medidas em <code>~/projetos/wifi/KLING-NOTAS-API-2026-08-02.md</code>.</p>
+  </div>
+  <div class="proven">
+    <strong>pixflow — filme a partir de imagem estática, sem IA de vídeo</strong>
+    <p>Parallax 2.5D com profundidade real, grain, LUT e vinheta. Determinístico: mesma entrada, mesmo resultado — o oposto do gerador de vídeo.</p>
+  </div>
+  <div class="proven">
+    <strong>inemaref — fábrica de conteúdo a partir de uma referência</strong>
+    <p>Um mesmo personagem atravessa folder, quadrinho, motion comic e série inteira, mantendo consistência visual.</p>
   </div>
 </div></section>
 
@@ -173,20 +210,22 @@
     <span>MP4</span>
   </div>
   <div class="grid g2" style="margin-top:22px">
-    <div class="card"><h3>🎞️ Quero algo reproduzível, sem IA de vídeo</h3><p>Câmera/parallax sobre imagens, motion graphics, HQ animada. → <b class="amb">pixflow</b>, <b class="amb">inemaref</b>, <b class="amb">HyperFrames</b>, <b class="amb">Remotion</b>.</p></div>
-    <div class="card"><h3>🤖 Quero movimento gerado por IA</h3><p>Pessoas/cenas em movimento real, avatar falante. → <b class="amb">VideosDGX2</b> (Wan), <b class="amb">HuMo</b>, <b class="amb">skyreelsv3</b>; ou <b class="amb">seedance2</b> p/ prompt na nuvem.</p></div>
-    <div class="card"><h3>🎬 Quero do assunto/link ao vídeo, automático</h3><p>Explicativo, demo de app, videoaula, reels de marketing. → <b class="amb">skill-videoprodutor</b>, <b class="amb">video-explicativo</b>, <b class="amb">videos-cursos-inema</b>, <b class="amb">timesmkt3</b>.</p></div>
-    <div class="card"><h3>✂️ Já tenho um vídeo e quero tratar</h3><p>Dublar, cortar fillers, legendar, dar upscale. → <b class="amb">dublar5</b>, <b class="amb">video-use</b>, <b class="amb">inemavox</b>, <b class="amb">upscayl</b>.</p></div>
+    <div class="card"><h3>🎞️ Quero algo reproduzível, sem IA de vídeo</h3><p>Câmera/parallax sobre imagens, motion graphics, HQ animada. → <b class="amb">pixflow</b>, <b class="amb">inemafilme</b>, <b class="amb">inemaref</b>, <b class="amb">HyperFrames</b>, <b class="amb">Remotion</b>.</p></div>
+    <div class="card"><h3>📖 Tenho uma história e quero o filme</h3><p>Conto, episódio, personagem consistente. → <b class="amb">videos-agnes</b> (simples, US$ 0) ou <b class="amb">videoanima</b> (com decupagem e provedor trocável).</p></div>
+    <div class="card"><h3>🤖 Quero movimento gerado por IA</h3><p>Na nuvem/assinatura: <b class="amb">klingaimcp</b>, <b class="amb">seedance2</b>. Local na GPU: <b class="amb">VideosDGX2</b> (Wan 2.2), <b class="amb">HuMo</b>, <b class="amb">skyreelsv3</b>.</p></div>
+    <div class="card"><h3>🗣️ Quero alguém falando na tela</h3><p>Avatar falante de roteiro. → <b class="amb">heygenmcp</b> (créditos da assinatura), <b class="amb">videosavatar</b>, ou <b class="amb">HuMo</b> pra lip-sync local.</p></div>
+    <div class="card"><h3>🎬 Quero do assunto/link ao vídeo, automático</h3><p>Explicativo, demo de app, videoaula, reels de marketing. → <b class="amb">videoprodutor</b>, <b class="amb">video-explicativo</b>, <b class="amb">video-demonstrativo</b>, <b class="amb">videos-cursos-inema</b>, <b class="amb">timesmkt3</b>.</p></div>
+    <div class="card"><h3>✂️ Já tenho um vídeo e quero tratar</h3><p>Dublar, cortar fillers, legendar, trocar a trilha. → <b class="amb">dublar pro</b>, <b class="amb">inemavox</b>, <b class="amb">musicaclone</b>, <b class="amb">inemadlp</b>.</p></div>
   </div>
 </div></section>
 
 <section id="catalogo"><div class="wrap">
   <span class="chip">Catálogo · por categoria</span>
   <h2>Os recursos, um por um</h2>
-  <p class="sub">Cada card: o que faz, entrada→saída/como rodar, e o link do repo. O ponto colorido indica o status. Repos marcados <i>(local)</i> ainda não têm remote no GitHub.</p>
+  <p class="sub">Cada card: o que faz, entrada→saída/como rodar, e o link. Onde existe página publicada, o link vai pro <b>guia</b>; senão, pro repo. O ponto colorido indica o status; <i>(local)</i> = sem remote no GitHub.</p>
 
   <!-- A -->
-  <div class="cat-h"><span class="lt">A</span><h3>Render determinístico</h3><span class="note">sem IA generativa de vídeo · reproduzível</span></div>
+  <div class="cat-h"><span class="lt">A</span><h3>Render determinístico</h3><span class="note">sem IA generativa de vídeo · mesma entrada, mesmo resultado</span></div>
   <div class="grid g2">
     <div class="card">
       <div class="meta"><span class="dot ok"></span><h3>pixflow</h3><span class="tag">parallax 2.5D</span></div>
@@ -195,14 +234,20 @@
       <a class="src" href="https://github.com/inematds/pixflow" target="_blank" rel="noopener">repo ↗</a>
     </div>
     <div class="card">
+      <div class="meta"><span class="dot ok"></span><h3>inemafilme</h3><span class="tag">filme narrado</span></div>
+      <p>Roteiro estruturado (<code>historia.json</code>) vira filme narrado em parallax sobre o motor pixflow — câmera escolhida por emoção, música e SFX.</p>
+      <p class="how">historia.json → MP4. Não escreve a história: isso é a skill <code>roteiro</code>.</p>
+      <a class="src" href="https://inematds.github.io/inemafilme/guia/" target="_blank" rel="noopener">guia ↗</a>
+    </div>
+    <div class="card">
       <div class="meta"><span class="dot ok"></span><h3>inemaref</h3><span class="tag">HQ / série</span></div>
       <p>Fábrica narrativa: folder de personagem → quadrinho → motion-comic e série inteira a partir de um assunto.</p>
       <p class="how">JSON (bíblia + roteiro) + referências → MP4 nas Formas A (slideshow), B (câmera-viagem) e C (dirigida). Python + Chrome headless + TTS + FFmpeg.</p>
-      <a class="src" href="https://github.com/inematds/inemaref" target="_blank" rel="noopener">repo ↗</a>
+      <a class="src" href="https://inematds.github.io/inemaref/" target="_blank" rel="noopener">guia ↗</a>
     </div>
     <div class="card">
       <div class="meta"><span class="dot ok"></span><h3>HyperFrames</h3><span class="tag">HTML → vídeo</span></div>
-      <p>Motor base de quase todas as skills: anima HTML+GSAP e grava via Chrome headless. <code>cchyperframes</code> = editor; <code>skill-hyperframes-videos</code> = a skill.</p>
+      <p>Motor base de quase todas as skills: anima HTML+GSAP e grava via Chrome headless. <code>cchyperframes</code> = editor.</p>
       <p class="how">HTML + narração TTS → MP4 16:9/9:16. Node + Playwright + Kokoro + FFmpeg.</p>
       <a class="src" href="https://github.com/inematds/cchyperframes" target="_blank" rel="noopener">cchyperframes ↗</a> &nbsp;·&nbsp;
       <a class="src" href="https://github.com/inematds/skill-hyperframes-videos" target="_blank" rel="noopener">skill ↗</a>
@@ -215,39 +260,63 @@
       <a class="src" href="https://github.com/reactvideoeditor/remotion-templates" target="_blank" rel="noopener">templates ↗</a>
     </div>
     <div class="card">
+      <div class="meta"><span class="dot ok"></span><h3>scroll-film-studio</h3><span class="tag">scroll = tempo</span></div>
+      <p>A página inteira é um plano cinematográfico único que avança conforme o visitante rola. Código puro (GSAP) ou footage de um gerador.</p>
+      <p class="how">assunto/footage → site scroll-film. Não é deck de slides nem site institucional.</p>
+      <a class="src" href="https://inematds.github.io/scroll-film-studio/guia/" target="_blank" rel="noopener">guia ↗</a>
+    </div>
+    <div class="card">
       <div class="meta"><span class="dot ok"></span><h3>mcp-video</h3><span class="tag">MCP · edição</span></div>
       <p>Servidor MCP (119 tools, guardrailed) pra agentes editarem vídeo: corte, merge, crop, overlays, legendas, efeitos.</p>
       <p class="how">specs JSON → vídeo editado + análise. Python 3.11 + FFmpeg + HyperFrames.</p>
-      <a class="src" href="https://github.com/inematds/mcp-video" target="_blank" rel="noopener">repo ↗</a>
+      <a class="src" href="https://inematds.github.io/mcp-video/" target="_blank" rel="noopener">guia ↗</a>
     </div>
   </div>
 
   <!-- B -->
-  <div class="cat-h"><span class="lt">B</span><h3>Geração de vídeo por IA</h3><span class="note">modelos generativos · GPU local ou nuvem</span></div>
+  <div class="cat-h"><span class="lt">B</span><h3>Geração de vídeo por IA — nuvem / assinatura</h3><span class="note">não precisa de GPU local</span></div>
   <div class="grid g2">
     <div class="card">
-      <div class="meta"><span class="dot ok"></span><h3>VideosDGX2</h3><span class="tag">Wan 2.2 · local</span></div>
-      <p>T2V + I2V local no DGX Spark com Wan 2.2 (14B MoE e 5B rápido), via ComfyUI + web UI.</p>
-      <p class="how">texto/imagem → MP4. UI na porta :7862. Pesos ~25–90GB VRAM.</p>
-      <a class="src" href="https://github.com/inematds/VideosDGX2" target="_blank" rel="noopener">repo ↗</a>
+      <div class="meta"><span class="dot wip"></span><h3>videoanima</h3><span class="tag">com decupagem</span></div>
+      <p>História → decupagem cinematográfica → keyframes A/B → clipes → filme vertical narrado. Mede o movimento de cada clipe e refaz o que sai parado. <i>Em ajuste: ver o post-mortem no repo.</i></p>
+      <p class="how">decupagem YAML → MP4 9:16. Provedor de imagem e vídeo trocável por parâmetro (agnes/inemaimg/kie · agnes/kling/klingai/kie).</p>
+      <a class="src" href="https://inematds.github.io/videoanima-skill/guia/" target="_blank" rel="noopener">guia ↗</a>
     </div>
     <div class="card">
-      <div class="meta"><span class="dot ok"></span><h3>HuMo</h3><span class="tag">humano falante</span></div>
-      <p>Vídeo humano-cêntrico audio-driven (lip-sync fino) com HuMo 17B/1.7B.</p>
-      <p class="how">texto + áudio (+ imagem) → 480/720p. GPU 32G+. Suporte ComfyUI.</p>
-      <span class="src local">(local — sem remote)</span>
+      <div class="meta"><span class="dot ok"></span><h3>videos-agnes</h3><span class="tag">US$ 0 · padrão-ouro</span></div>
+      <p>História/conto → filme animado narrado via Agnes AI, entregue no Telegram. O caminho simples: sem decupagem, sem escolher provedor.</p>
+      <p class="how">história → model sheet + 2 imagens/cena + clipes + narração local → MP4.</p>
+      <a class="src" href="https://inematds.github.io/videos-agnes/guia/" target="_blank" rel="noopener">guia ↗</a>
     </div>
     <div class="card">
-      <div class="meta"><span class="dot ok"></span><h3>skyreelsv3</h3><span class="tag">R2V/V2V/avatar</span></div>
-      <p>Web UI completa do SkyReels V3: reference-to-video, video-to-video e talking avatar, com fila de jobs.</p>
-      <p class="how">texto/imagem/áudio → vídeo. PyTorch + diffusers + FastAPI.</p>
-      <a class="src" href="https://github.com/inematds/skyreelsv3" target="_blank" rel="noopener">repo ↗</a>
+      <div class="meta"><span class="dot ok"></span><h3>klingaimcp / klingai-nei</h3><span class="tag">Kling · assinatura</span></div>
+      <p>Kling AI via MCP e CLI com a assinatura própria (Pro/SVIP) — inclui dublagem com voz clonada. Notas de API medidas.</p>
+      <p class="how">imagem/prompt → clipe. Aceita caminho local pelo CLI; via fal.ai exige keyframe em URL pública.</p>
+      <a class="src" href="https://inematds.github.io/klingaimcp/guia/" target="_blank" rel="noopener">guia ↗</a>
     </div>
     <div class="card">
-      <div class="meta"><span class="dot ok"></span><h3>Open-Generative-AI</h3><span class="tag">plataforma</span></div>
-      <p>App desktop (Electron) com 4 estúdios — imagem, vídeo, lip sync e cinema — agregando 200+ modelos.</p>
-      <p class="how">variado → vídeo/imagem. macOS/Windows/Linux.</p>
-      <a class="src" href="https://github.com/Anil-matcha/Open-Generative-AI" target="_blank" rel="noopener">repo ↗</a>
+      <div class="meta"><span class="dot ok"></span><h3>heygenmcp</h3><span class="tag">avatar · créditos</span></div>
+      <p>Avatar falante no HeyGen gastando os <b>créditos da assinatura</b> (via MCP), não o wallet de API.</p>
+      <p class="how">roteiro → MP4 9:16. A irmã <code>heygen-cli</code> faz o mesmo pela API key (pago à parte).</p>
+      <a class="src" href="https://inematds.github.io/heygenmcp/guia/" target="_blank" rel="noopener">guia ↗</a>
+    </div>
+    <div class="card">
+      <div class="meta"><span class="dot ok"></span><h3>videosavatar</h3><span class="tag">avatar falante</span></div>
+      <p>Roteiro → avatar falante no HeyGen, com os looks/personagens configurados da conta.</p>
+      <p class="how">texto → MP4 9:16, voz PT-BR, engine avatar_iii.</p>
+      <a class="src" href="https://inematds.github.io/videosavatar/" target="_blank" rel="noopener">guia ↗</a>
+    </div>
+    <div class="card">
+      <div class="meta"><span class="dot ok"></span><h3>video-making-of-skill</h3><span class="tag">efeito prático</span></div>
+      <p>Uma foto vira maquete dentro de um rig de efeitos práticos de estúdio, e a simulação destrói a maquete em plano único de bastidores.</p>
+      <p class="how">foto → vídeo behind-the-scenes. Receitas medidas para Kling e Agnes.</p>
+      <a class="src" href="https://inematds.github.io/video-making-of-skill/guia/" target="_blank" rel="noopener">guia ↗</a>
+    </div>
+    <div class="card">
+      <div class="meta"><span class="dot ok"></span><h3>vsvideo-skill</h3><span class="tag">virtual staging</span></div>
+      <p>Foto de interior finalizado → vídeo time-lapse de reforma: gera o “antes da obra” com a mesma câmera e arquitetura, e o vídeo antes→depois.</p>
+      <p class="how">1 foto → MP4 antes/depois. GPT Image + Higgsfield Seedance.</p>
+      <a class="src" href="https://inematds.github.io/vsvideo-skill/guia/" target="_blank" rel="noopener">guia ↗</a>
     </div>
     <div class="card">
       <div class="meta"><span class="dot ok"></span><h3>seedance2</h3><span class="tag">prompt → nuvem</span></div>
@@ -255,77 +324,143 @@
       <p class="how">descrição → prompt 300–450 palavras + link de geração.</p>
       <a class="src" href="https://github.com/inematds/seedance2" target="_blank" rel="noopener">repo ↗</a>
     </div>
-    <div class="card">
-      <div class="meta"><span class="dot dead"></span><h3>skyreels · humo2 · HuMo_clean/_velho</h3><span class="tag">limpeza</span></div>
-      <p>Vazios, WIP ou legado — candidatos a remover/arquivar. Use <b>skyreelsv3</b> e <b>HuMo</b> como canônicos.</p>
-    </div>
   </div>
 
   <!-- C -->
-  <div class="cat-h"><span class="lt">C</span><h3>Direção, plano &amp; prompt</h3><span class="note">decidem o vídeo; não renderizam o final</span></div>
+  <div class="cat-h"><span class="lt">C</span><h3>Geração de vídeo por IA — local / GPU</h3><span class="note">roda na sua máquina · sem custo por clipe</span></div>
+  <div class="grid g2">
+    <div class="card">
+      <div class="meta"><span class="dot ok"></span><h3>VideosDGX2</h3><span class="tag">Wan 2.2 · local</span></div>
+      <p>T2V + I2V local no DGX Spark com Wan 2.2 (14B MoE e 5B rápido), via ComfyUI + web UI.</p>
+      <p class="how">texto/imagem → MP4. UI na porta :7862. Pesos ~25–90GB VRAM.</p>
+      <a class="src" href="https://inematds.github.io/VideosDGX2/guia/" target="_blank" rel="noopener">guia ↗</a>
+    </div>
+    <div class="card">
+      <div class="meta"><span class="dot ok"></span><h3>HuMo</h3><span class="tag">humano falante</span></div>
+      <p>Vídeo humano-cêntrico audio-driven (lip-sync fino) com HuMo 17B/1.7B. É a alternativa local ao avatar de nuvem.</p>
+      <p class="how">texto + áudio (+ imagem) → 480/720p. GPU 32G+. Suporte ComfyUI.</p>
+      <span class="src local">(local — sem remote)</span>
+    </div>
+    <div class="card">
+      <div class="meta"><span class="dot ok"></span><h3>skyreelsv3</h3><span class="tag">R2V/V2V/avatar</span></div>
+      <p>Web UI completa do SkyReels V3: reference-to-video, video-to-video e talking avatar, com fila de jobs.</p>
+      <p class="how">texto/imagem/áudio → vídeo. PyTorch + diffusers + FastAPI.</p>
+      <a class="src" href="https://inematds.github.io/skyreelsv3/" target="_blank" rel="noopener">guia ↗</a>
+    </div>
+    <div class="card">
+      <div class="meta"><span class="dot ok"></span><h3>Open-Generative-AI</h3><span class="tag">plataforma</span></div>
+      <p>App desktop (Electron) com 4 estúdios — imagem, vídeo, lip sync e cinema — agregando 200+ modelos.</p>
+      <p class="how">variado → vídeo/imagem. macOS/Windows/Linux.</p>
+      <a class="src" href="https://github.com/Anil-matcha/Open-Generative-AI" target="_blank" rel="noopener">repo ↗</a>
+    </div>
+  </div>
+
+  <!-- D -->
+  <div class="cat-h"><span class="lt">D</span><h3>Imagem</h3><span class="note">o quadro de todo filme começa aqui</span></div>
+  <div class="grid g2">
+    <div class="card">
+      <div class="meta"><span class="dot ok"></span><h3>inemaimg</h3><span class="tag">servidor local</span></div>
+      <p>Servidor de imagem com hot-swap de modelos: <b>flux2-klein</b> (default do ecossistema), Qwen-Edit, FLUX.2-dev, ERNIE. Sem filtro de conteúdo, aceita refs nativas, tem seed.</p>
+      <p class="how">prompt (+1–4 refs) → PNG. API HTTP em <code>localhost:8000</code>. ~31s/imagem no DGX.</p>
+      <a class="src" href="https://inematds.github.io/inemaimg/" target="_blank" rel="noopener">guia ↗</a>
+    </div>
+    <div class="card">
+      <div class="meta"><span class="dot ok"></span><h3>imagens-agnes</h3><span class="tag">US$ 0 · nuvem</span></div>
+      <p>Imagem avulsa via Agnes (<code>agnes-image-2.1-flash</code>), sem custo. CLI <code>gerar.py</code>. Atenção ao filtro: criança devolve HTTP 400.</p>
+      <p class="how">prompt (+refs) → PNG. Companheira do <code>videos-agnes</code>.</p>
+      <a class="src" href="https://inematds.github.io/videos-agnes/guia/" target="_blank" rel="noopener">guia ↗</a>
+    </div>
+    <div class="card">
+      <div class="meta"><span class="dot ok"></span><h3>agnesfree</h3><span class="tag">notas de API</span></div>
+      <p>A API Agnes dissecada em ~70 chamadas: texto, imagem e vídeo. As regras que valem dinheiro, os defeitos do modelo e os rate limits.</p>
+      <p class="how">documentação medida — leia antes de escrever integração nova.</p>
+      <a class="src" href="https://inematds.github.io/agnesfree/guia/" target="_blank" rel="noopener">guia ↗</a>
+    </div>
+    <div class="card">
+      <div class="meta"><span class="dot ok"></span><h3>upscayl</h3><span class="tag">upscale</span></div>
+      <p>Upscale de imagem por IA (Real-ESRGAN, 2x/4x) — útil pra refinar quadros antes do render.</p>
+      <p class="how">imagem baixa → imagem 2x/4x. App Electron.</p>
+      <a class="src" href="https://github.com/upscayl/upscayl" target="_blank" rel="noopener">repo ↗</a>
+    </div>
+    <div class="card">
+      <div class="meta"><span class="dot wip"></span><h3>promptprof</h3><span class="tag">prompt · lab</span></div>
+      <p>Motor de prompts KairoBoost (direção de arte) + case end-to-end (stills → vídeo 9:16 com narração).</p>
+      <p class="how">intenção + preset → prompt refinado → inemaimg + HyperFrames.</p>
+      <a class="src" href="https://github.com/inematds/promptprof" target="_blank" rel="noopener">repo ↗</a>
+    </div>
+  </div>
+
+  <!-- E -->
+  <div class="cat-h"><span class="lt">E</span><h3>Direção, plano &amp; prompt</h3><span class="note">decidem o vídeo; não renderizam o final</span></div>
   <div class="grid g2">
     <div class="card">
       <div class="meta"><span class="dot ok"></span><h3>mdd</h3><span class="tag">direção dinâmica</span></div>
       <p>Mestre de Direção Dinâmica: transforma um assunto em pacote de direção (cena, câmera, continuidade) pra geradores IA.</p>
-      <p class="how">assunto → direção estruturada p/ Seedance/Kling/Runway/Veo/Luma.</p>
-      <a class="src" href="https://github.com/inematds/mdd" target="_blank" rel="noopener">repo ↗</a>
+      <p class="how">assunto → storyboard de painéis + prompt final e negativo p/ Seedance/Kling/Veo/Runway.</p>
+      <a class="src" href="https://inematds.github.io/mdd/" target="_blank" rel="noopener">guia ↗</a>
     </div>
     <div class="card">
       <div class="meta"><span class="dot ok"></span><h3>diretor-animacao</h3><span class="tag">decupagem</span></div>
       <p>Direção de câmera (18 movimentos, regras validadas A/B) sobre imagens + narração.</p>
       <p class="how">imagens + narração → decupagem JSON + YAML pixflow → MP4.</p>
-      <a class="src" href="https://github.com/inematds/diretor-animacao" target="_blank" rel="noopener">repo ↗</a>
+      <a class="src" href="https://inematds.github.io/diretor-animacao-guia/" target="_blank" rel="noopener">guia ↗</a>
     </div>
     <div class="card">
       <div class="meta"><span class="dot ok"></span><h3>video-plan-editor</h3><span class="tag">plano JSON</span></div>
-      <p>Gera plano de edição agnóstico de motor (Viral5 / Hero / Save-the-Cat). A skill <code>skill-video-plan-editor</code> é a versão empacotada.</p>
-      <p class="how">assunto + preset → plano-edicao.json + RESUMO.</p>
-      <a class="src" href="https://github.com/inematds/skill-video-plan-editor" target="_blank" rel="noopener">skill ↗</a> &nbsp;·&nbsp; <span class="src local">core (local)</span>
-    </div>
-    <div class="card">
-      <div class="meta"><span class="dot wip"></span><h3>promptprof</h3><span class="tag">prompts · lab</span></div>
-      <p>Motor de prompts KairoBoost (direção de arte) + case end-to-end (stills → vídeo 9:16 com narração).</p>
-      <p class="how">intenção + preset → prompt refinado → inemaimg + HyperFrames.</p>
-      <a class="src" href="https://github.com/inematds/promptprof" target="_blank" rel="noopener">repo ↗</a>
+      <p>Gera plano de edição agnóstico de motor (Viral5 / Hero / Save-the-Cat), com pacote Python <code>vpe</code>.</p>
+      <p class="how">assunto + preset → plano-edicao.json + RESUMO → render via HyperFrames.</p>
+      <a class="src" href="https://inematds.github.io/skill-video-plan-editor/" target="_blank" rel="noopener">guia ↗</a>
     </div>
     <div class="card">
       <div class="meta"><span class="dot wip"></span><h3>fontefilm</h3><span class="tag">engine · protótipo</span></div>
       <p>Engine de filmmaking local-first dirigida por knowledge packs (conceito provado no case Hormozi-12).</p>
       <p class="how">assunto → imagens (flux2) + narração (inemavox) + parallax (pixflow).</p>
-      <a class="src" href="https://github.com/inematds/fontefilm" target="_blank" rel="noopener">repo ↗</a>
+      <a class="src" href="https://inematds.github.io/fontefilm/" target="_blank" rel="noopener">guia ↗</a>
     </div>
   </div>
 
-  <!-- D -->
-  <div class="cat-h"><span class="lt">D</span><h3>Orquestradores ponta-a-ponta</h3><span class="note">assunto/link → vídeo pronto</span></div>
+  <!-- F -->
+  <div class="cat-h"><span class="lt">F</span><h3>Orquestradores ponta-a-ponta</h3><span class="note">assunto/link → vídeo pronto</span></div>
   <div class="grid g2">
     <div class="card">
-      <div class="meta"><span class="dot ok"></span><h3>skill-videoprodutor</h3><span class="tag">o Produtor</span></div>
+      <div class="meta"><span class="dot ok"></span><h3>videoprodutor</h3><span class="tag">o Produtor</span></div>
       <p>Linha de montagem completa: plano → direção + imagem → voz → render em 3 camadas (cinema + texto + ilustração).</p>
       <p class="how">link/fonte → MP4 profissional 16:9 + 9:16. Reusa mdd, flux2, inemavox, HyperFrames, Remotion.</p>
-      <a class="src" href="https://github.com/inematds/skill-videoprodutor" target="_blank" rel="noopener">repo ↗</a>
+      <a class="src" href="https://inematds.github.io/videoprodutor/guia/" target="_blank" rel="noopener">guia ↗</a>
     </div>
     <div class="card">
-      <div class="meta"><span class="dot ok"></span><h3>skill-video-explicativo</h3><span class="tag">explicativo</span></div>
-      <p>Vídeo educativo narrado PT-BR, do roteiro à CTA INEMA.CLUB.</p>
-      <p class="how">assunto → cenas → Kokoro → HTML/GSAP → HyperFrames → MP4 16:9 + 9:16.</p>
-      <a class="src" href="https://github.com/inematds/skill-video-explicativo" target="_blank" rel="noopener">repo ↗</a>
+      <div class="meta"><span class="dot ok"></span><h3>video-explicativo</h3><span class="tag">explicativo</span></div>
+      <p>Vídeo educativo narrado PT-BR, do roteiro à CTA INEMA.CLUB. Motion graphics — não mostra app real.</p>
+      <p class="how">assunto → cenas → TTS local → HTML/GSAP → HyperFrames → MP4 16:9 + 9:16.</p>
+      <a class="src" href="https://inematds.github.io/video-explicativo/guia/" target="_blank" rel="noopener">guia ↗</a>
     </div>
     <div class="card">
-      <div class="meta"><span class="dot ok"></span><h3>skill-video-demonstrativo</h3><span class="tag">demo de app</span></div>
-      <p>Walkthrough automático de um web app: navega o app real, captura as telas e narra.</p>
+      <div class="meta"><span class="dot ok"></span><h3>video-demonstrativo</h3><span class="tag">demo de app</span></div>
+      <p>Walkthrough automático de um web app: navega o app <b>de verdade</b>, captura as telas reais e narra, com cursor animado e zoom.</p>
       <p class="how">link → captura UI → narração → MP4 16:9 + 9:16.</p>
-      <a class="src" href="https://github.com/inematds/skill-video-demonstrativo" target="_blank" rel="noopener">repo ↗</a>
+      <a class="src" href="https://inematds.github.io/video-demonstrativo/guia/" target="_blank" rel="noopener">guia ↗</a>
     </div>
     <div class="card">
       <div class="meta"><span class="dot ok"></span><h3>videos-cursos-inema</h3><span class="tag">videoaulas</span></div>
-      <p>Gera os vídeos de um curso INEMA em 3 níveis: landing, trilhas e aula profunda por módulo.</p>
-      <p class="how">curso spec → roteiro → inemavox → HyperFrames → MP4.</p>
+      <p>Gera os vídeos de um curso INEMA em 3 níveis selecionáveis: landing, trilhas e aula profunda por módulo/dia.</p>
+      <p class="how">site do curso → roteiro → inemavox → HyperFrames → MP4.</p>
       <a class="src" href="https://github.com/inematds/videos-cursos-inema" target="_blank" rel="noopener">repo ↗</a>
     </div>
     <div class="card">
+      <div class="meta"><span class="dot ok"></span><h3>promoavatar</h3><span class="tag">1 reel/público</span></div>
+      <p>Reels de divulgação para 12 públicos, com <b>portão humano</b> no meio: o bot escreve os textos e para até você aprovar.</p>
+      <p class="how">catálogo de públicos → textos → avatar → reel 9:16.</p>
+      <a class="src" href="https://inematds.github.io/promoavatar/guia/" target="_blank" rel="noopener">guia ↗</a>
+    </div>
+    <div class="card">
+      <div class="meta"><span class="dot ok"></span><h3>promoavatar3</h3><span class="tag">3 reels/público</span></div>
+      <p>Mesma ideia, três vídeos por público em vez de um: alcance, autoridade e promocional. Sistema separado, com motor e templates próprios.</p>
+      <p class="how"><code>/aprovar C#N</code> libera avatar, download e reel.</p>
+      <a class="src" href="https://inematds.github.io/promoavatar3/guia/" target="_blank" rel="noopener">guia ↗</a>
+    </div>
+    <div class="card">
       <div class="meta"><span class="dot ok"></span><h3>mkivideos</h3><span class="tag">fila / worker</span></div>
-      <p>Enfileira (FIFO) e executa os renders das skills acima em background, com notificação e painel.</p>
+      <p>Enfileira (FIFO) e executa os renders das skills acima em background, com notificação e painel. Serializa a GPU.</p>
       <p class="how">comando (CLI/Telegram) → enqueue → worker → MP4 + aviso.</p>
       <a class="src" href="https://github.com/inematds/mkivideos" target="_blank" rel="noopener">repo ↗</a>
     </div>
@@ -333,19 +468,18 @@
       <div class="meta"><span class="dot ok"></span><h3>timesmkt3 (IMKT)</h3><span class="tag">marketing</span></div>
       <p>Time de agentes de marketing: gera reels/ads (Remotion nativo, quick) e delega autorais longos pro <code>mkvideos</code>. Canônico da família timesmkt/2/3, imkt4/5.</p>
       <p class="how">/campanha → 5 stages → imagem (inemaimg) + voz (chatterbox) + vídeo → publica.</p>
-      <a class="src" href="https://github.com/inematds/timesmkt3" target="_blank" rel="noopener">timesmkt3 ↗</a> &nbsp;·&nbsp;
-      <a class="src" href="https://github.com/inematds/mkvideos" target="_blank" rel="noopener">mkvideos ↗</a>
+      <a class="src" href="https://inematds.github.io/timesmkt3/" target="_blank" rel="noopener">guia ↗</a>
     </div>
   </div>
 
-  <!-- E -->
-  <div class="cat-h"><span class="lt">E</span><h3>Suporte: voz &amp; imagem</h3><span class="note">alimentam narração e quadros</span></div>
+  <!-- G -->
+  <div class="cat-h"><span class="lt">G</span><h3>Voz, música &amp; pós-produção</h3><span class="note">a trilha sonora de tudo acima</span></div>
   <div class="grid g2">
     <div class="card">
       <div class="meta"><span class="dot ok"></span><h3>inemavox</h3><span class="tag">voz · GPU</span></div>
-      <p>Suite de voz GPU-first: clonagem zero-shot (Chatterbox) + transcrição (Whisper) + dublagem.</p>
-      <p class="how">texto/URL → wav/vídeo dublado. Daemon FastAPI :8010 (no inemaref em 127.0.0.1:7860).</p>
-      <a class="src" href="https://github.com/inematds/inemavox" target="_blank" rel="noopener">repo ↗</a>
+      <p>Suite de voz GPU-first: clonagem zero-shot (Chatterbox) + transcrição (Whisper) + dublagem + <b>busca de música e SFX</b> (Pixabay/Freesound).</p>
+      <p class="how">texto/URL → wav/vídeo dublado. Daemon FastAPI :8010. Voz default do ecossistema: <code>rachel</code>.</p>
+      <a class="src" href="https://inematds.github.io/inemavox/" target="_blank" rel="noopener">guia ↗</a>
     </div>
     <div class="card">
       <div class="meta"><span class="dot ok"></span><h3>inemavox2</h3><span class="tag">voz · CPU/API</span></div>
@@ -360,10 +494,22 @@
       <a class="src" href="https://github.com/resemble-ai/chatterbox" target="_blank" rel="noopener">repo ↗</a>
     </div>
     <div class="card">
-      <div class="meta"><span class="dot ok"></span><h3>inemaimg</h3><span class="tag">imagem · server</span></div>
-      <p>Servidor local de imagem com hot-swap de modelos: <b>flux2-klein</b> (default), Qwen-Edit, FLUX.2-dev, ERNIE.</p>
-      <p class="how">prompt (+1–4 refs) → PNG. FastAPI :8000. ~31s/imagem no DGX.</p>
-      <a class="src" href="https://github.com/inematds/inemaimg" target="_blank" rel="noopener">repo ↗</a>
+      <div class="meta"><span class="dot ok"></span><h3>musicaclone</h3><span class="tag">música</span></div>
+      <p>Trilha para os vídeos — clonagem/geração de música, pra não depender só de acervo.</p>
+      <p class="how">referência/prompt → faixa de áudio.</p>
+      <a class="src" href="https://inematds.github.io/musicaclone/guia/" target="_blank" rel="noopener">guia ↗</a>
+    </div>
+    <div class="card">
+      <div class="meta"><span class="dot ok"></span><h3>inemadlp</h3><span class="tag">download</span></div>
+      <p>Downloader do ecossistema (yt-dlp): de onde vêm música, ambiência e SFX quando um vídeo precisa de áudio.</p>
+      <p class="how">URL → áudio/vídeo local.</p>
+      <a class="src" href="https://inematds.github.io/inemadlp/guia/" target="_blank" rel="noopener">guia ↗</a>
+    </div>
+    <div class="card">
+      <div class="meta"><span class="dot ok"></span><h3>dublar pro</h3><span class="tag">dublagem</span></div>
+      <p>Dublagem + corte + transcrição com interface web. Múltiplos ASR/TTS/LLM. Canônico — <code>dublar/2/4</code> são superados.</p>
+      <p class="how">vídeo → vídeo dublado. FastAPI + Next. Repo: <code>dublarv5</code>.</p>
+      <a class="src" href="https://inematds.github.io/dublarv5/" target="_blank" rel="noopener">guia ↗</a>
     </div>
     <div class="card">
       <div class="meta"><span class="dot ok"></span><h3>Kokoro</h3><span class="tag">TTS local</span></div>
@@ -372,36 +518,10 @@
       <span class="src local">(dentro das skills)</span>
     </div>
     <div class="card">
-      <div class="meta"><span class="dot dead"></span><h3>ivox2 · NanoBanana</h3><span class="tag">pesquisa/curso</span></div>
-      <p><b>ivox2</b>: só docs de pesquisa (sem código). <b>NanoBanana</b>: curso de prompt de imagem/vídeo, não ferramenta.</p>
-    </div>
-  </div>
-
-  <!-- F -->
-  <div class="cat-h"><span class="lt">F</span><h3>Dublagem &amp; pós-produção</h3><span class="note">transformam um vídeo existente</span></div>
-  <div class="grid g2">
-    <div class="card">
-      <div class="meta"><span class="dot ok"></span><h3>dublar5</h3><span class="tag">canônico</span></div>
-      <p>Dublagem + corte + transcrição com interface web. Múltiplos ASR/TTS/LLM. (dublar/2/4 são superados.)</p>
-      <p class="how">vídeo → vídeo dublado. FastAPI :8000 + Next :3000. Repo: <code>dublarv5</code>.</p>
-      <a class="src" href="https://github.com/inematds/dublarv5" target="_blank" rel="noopener">repo ↗</a>
-    </div>
-    <div class="card">
-      <div class="meta"><span class="dot ok"></span><h3>video-use</h3><span class="tag">corte ⚠️</span></div>
-      <p>Corte inteligente: remove fillers (umm/uh), color grade, legendas e overlays via LLM→EDL. <i>(Verificar: há também relato de ser curso.)</i></p>
+      <div class="meta"><span class="dot ok"></span><h3>video-use</h3><span class="tag">corte</span></div>
+      <p>Corte inteligente: remove fillers (umm/uh), color grade, legendas e overlays via LLM→EDL.</p>
       <p class="how">raw footage → vídeo montado. FFmpeg + LLM + render.</p>
       <a class="src" href="https://github.com/browser-use/video-use" target="_blank" rel="noopener">repo ↗</a>
-    </div>
-    <div class="card">
-      <div class="meta"><span class="dot ok"></span><h3>upscayl</h3><span class="tag">upscale</span></div>
-      <p>Upscale de imagem por IA (Real-ESRGAN, 2x/4x) — útil pra refinar quadros antes do render.</p>
-      <p class="how">imagem baixa → imagem 2x/4x. App Electron.</p>
-      <a class="src" href="https://github.com/upscayl/upscayl" target="_blank" rel="noopener">repo ↗</a>
-    </div>
-    <div class="card">
-      <div class="meta"><span class="dot ok"></span><h3>inemavox / inemavox2</h3><span class="tag">também dublam</span></div>
-      <p>As suites de voz também fazem dublagem ponta-a-ponta (download → transcrição → tradução → síntese → remux). Ver categoria E.</p>
-      <a class="src" href="https://github.com/inematds/inemavox" target="_blank" rel="noopener">inemavox ↗</a>
     </div>
   </div>
 </div></section>
@@ -414,9 +534,9 @@
     <div class="card"><h3>🖼️ inemaimg (imagem)</h3><p>Servidor flux2-klein e cia.</p><pre><span class="c"># sobe o server de imagem</span>
 <span class="k">cd</span> ~/projetos/inemaimg
 <span class="k">docker compose up</span> <span class="c"># :8000</span></pre></div>
-    <div class="card"><h3>🎙️ inemavox (voz)</h3><p>Narração / clonagem.</p><pre><span class="c"># daemon de voz</span>
+    <div class="card"><h3>🎙️ inemavox (voz)</h3><p>Narração / clonagem / SFX.</p><pre><span class="c"># daemon de voz</span>
 <span class="k">cd</span> ~/projetos/inemavox
-<span class="k">uvicorn</span> app:api <span class="c"># :8010 / :7860</span></pre></div>
+<span class="k">uvicorn</span> app:api <span class="c"># :8010</span></pre></div>
     <div class="card"><h3>🧰 Base de render</h3><p>Node + FFmpeg + Chrome (HyperFrames).</p><pre><span class="c"># checagem rápida</span>
 <span class="k">node</span> -v && <span class="k">ffmpeg</span> -version
 <span class="k">echo</span> $CHROMIUM_BIN</pre></div>
@@ -432,23 +552,29 @@
     <h3>Suba imagem e voz</h3>
     <p>Os orquestradores chamam esses serviços; deixe-os no ar.</p>
 <pre><span class="k">cd</span> ~/projetos/inemaimg && <span class="k">docker compose up -d</span>   <span class="c"># imagem :8000</span>
-<span class="k">cd</span> ~/projetos/inemavox && <span class="k">uvicorn</span> app:api &amp;        <span class="c"># voz</span></pre>
+<span class="k">cd</span> ~/projetos/inemavox && <span class="k">uvicorn</span> app:api &amp;        <span class="c"># voz :8010</span></pre>
   </div></div>
 
   <div class="step"><div class="b">2</div><div>
     <h3>Escolha o caminho no catálogo</h3>
-    <p>Explicativo → <code>skill-video-explicativo</code>. Demo de app → <code>skill-video-demonstrativo</code>. Pro/landing → <code>skill-videoprodutor</code>. Série/HQ → <code>inemaref</code>.</p>
+    <p>Explicativo → <code>video-explicativo</code>. Demo de app → <code>video-demonstrativo</code>. Pro/landing → <code>videoprodutor</code>. História → <code>videos-agnes</code> ou <code>videoanima</code>. Série/HQ → <code>inemaref</code>.</p>
 <pre><span class="c"># cada skill responde a help</span>
 <span class="k">/video-explicativo</span> <span class="s">"o que é engenharia de contexto"</span></pre>
   </div></div>
 
   <div class="step"><div class="b">3</div><div>
+    <h3>Valide antes de gastar</h3>
+    <p>Nos caminhos com provedor pago, confira ritmo e custo antes da primeira chamada.</p>
+<pre><span class="k">python3 rodar.py</span> exemplo <span class="k">--so-decupagem</span>   <span class="c"># videoanima: valida sem gerar</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">4</div><div>
     <h3>Deixe a fila renderizar</h3>
     <p>Para lotes, enfileire no mkivideos e siga a vida — ele serializa a GPU e avisa no fim.</p>
 <pre><span class="k">/mkivideos</span> explicativo <span class="s">"tema"</span>   <span class="c"># enfileira e renderiza em background</span></pre>
   </div></div>
 
-  <div class="step"><div class="b">4</div><div>
+  <div class="step"><div class="b">5</div><div>
     <h3>Pegue o MP4</h3>
     <p>A saída cai na pasta de output padrão; mova o final pro destino.</p>
 <pre><span class="k">ls</span> ~/projetos/output/&lt;projeto&gt;/   <span class="c"># mp4 16:9 e/ou 9:16</span></pre>
@@ -460,16 +586,17 @@
   <h2>Canônicos, duplicados &amp; limpeza</h2>
   <p class="sub">Vários projetos têm variantes. Use os canônicos; arquive ou remova o resto.</p>
   <div class="phase"><div class="tag">Voz</div><div class="d"><strong>inemavox (GPU) + inemavox2 (CPU)</strong><span>Canônicos. <code>ivox2</code> é só pesquisa — descartável.</span></div></div>
-  <div class="phase"><div class="tag">IA vídeo</div><div class="d"><strong>skyreelsv3 · HuMo · VideosDGX2</strong><span>Vazios/legado a limpar: <code>skyreels</code>, <code>humo2</code>, <code>HuMo_clean</code>, <code>HuMo_velho</code>.</span></div></div>
-  <div class="phase"><div class="tag">Dublagem</div><div class="d"><strong>dublar5 (Pro v5.3.1)</strong><span><code>dublar</code>, <code>dublar2</code>, <code>dublar4</code> são versões antigas.</span></div></div>
+  <div class="phase"><div class="tag">IA vídeo</div><div class="d"><strong>skyreelsv3 · HuMo · VideosDGX2</strong><span>Vazios/legado a limpar: <code>skyreels</code>, <code>humo2</code>, <code>HuMo_clean</code>, <code>HuMo_velho</code>. <code>VideosDGX</code> é a geração anterior do DGX2.</span></div></div>
+  <div class="phase"><div class="tag">História</div><div class="d"><strong>videos-agnes (simples) + videoanima (com direção)</strong><span>Não são o mesmo caminho: o primeiro é Agnes-only e direto; o segundo tem decupagem, keyframes A/B e provedor trocável. <code>videosanimados</code> e <code>mkvideos</code> são motores mais antigos da mesma família.</span></div></div>
+  <div class="phase"><div class="tag">Dublagem</div><div class="d"><strong>dublar pro (dublarv5)</strong><span><code>dublar</code>, <code>dublar2</code>, <code>dublar4</code> são versões antigas.</span></div></div>
   <div class="phase"><div class="tag">Marketing</div><div class="d"><strong>timesmkt3</strong><span><code>timesmkt</code>/<code>timesmkt2</code> superados; <code>imkt4</code> duplicado; <code>imkt5</code> = nova arquitetura (ainda sem gerador de vídeo).</span></div></div>
-  <div class="phase"><div class="tag">Verificar</div><div class="d"><strong>video-use</strong><span>Relato conflitante entre os scans (ferramenta de corte × curso). Confirmar antes de adotar.</span></div></div>
+  <div class="phase"><div class="tag">Motor × peça</div><div class="d"><strong>As 14 pastas <code>*-video</code> não são ferramentas</strong><span><code>agentic-video</code>, <code>aiosagi-video</code>, <code>consultoria2k-video</code>, <code>hermes21c-video</code>, <code>mapacliente-video</code>, <code>my-video</code>, <code>opus48-video</code>, <code>polyskills-video</code>, <code>segrobot-video</code>, <code>uany-video</code>, <code>vla-video</code> e cia. são composições HyperFrames de <b>uma peça só</b> — não procure motor ali.</span></div></div>
 </div></section>
 
 <footer>
   <div class="wrap">
-    <div class="pill">pixflow</div><div class="pill">inemaref</div><div class="pill">HyperFrames</div><div class="pill">Remotion</div><div class="pill">Wan 2.2</div><div class="pill">HuMo</div><div class="pill">SkyReels</div><div class="pill">flux2-klein</div><div class="pill">inemavox</div><div class="pill">FFmpeg</div>
-    <p style="margin-top:18px">Recursos de Vídeo · catálogo-guia do ecossistema INEMA ·
+    <div class="pill">pixflow</div><div class="pill">inemaref</div><div class="pill">HyperFrames</div><div class="pill">Remotion</div><div class="pill">Wan 2.2</div><div class="pill">Kling</div><div class="pill">HeyGen</div><div class="pill">Agnes</div><div class="pill">SkyReels</div><div class="pill">flux2-klein</div><div class="pill">inemavox</div><div class="pill">FFmpeg</div>
+    <p style="margin-top:18px">Recursos de Vídeo · catálogo-guia do ecossistema INEMA · atualizado em 17/08/2026 ·
       <a href="https://github.com/inematds/recursos-video">github.com/inematds/recursos-video</a> ·
       <a href="https://inema.club">INEMA.CLUB</a></p>
   </div>
