@@ -1,5 +1,7 @@
 # 🎬 Recursos de Vídeo — ecossistema INEMA
 
+**🇧🇷 [Português](README.md) · 🇺🇸 [English](README.en.md) · 🇪🇸 [Español](README.es.md)**
+
 Catálogo-guia de todos os projetos do ecossistema INEMA que **geram ou processam vídeo**,
 organizado por categoria, com o que cada um faz, como rodar e o link do repo.
 
